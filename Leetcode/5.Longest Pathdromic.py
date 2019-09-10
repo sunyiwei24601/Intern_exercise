@@ -38,10 +38,38 @@ class Solution:
                 return False, result_right[1]
         
         result =  check_pattern(0, len(s) - 1)[1]
-        return result
+        return result 
+    
+    def longestPalindrome2(self, s):
+        def isPalindrome(low, high):
+            len_ = len(s)
+            while( low >= 0 and high < len_):
+                if s[low] == s[high]:
+                    low -= 1
+                    high += 1
+                else:
+                    return s[low+1 : high ]
+            return s[low+1: high]
+
+        if len(s) <2:
+            return s
+        max_l = 0
+        max_s = ""
+        for i in range(len(s) - 1):
+            result1 = isPalindrome(i, i+1)
+            result2 = isPalindrome(i, i)
+
+            print(result1, result2)
+            max_s = max(result1, result2, max_s, key = len)
+        return max_s
+
+
+        
+
+
 if __name__ == "__main__":
     s = Solution() 
-    print(s.longestPalindrome("vaomxdtiuwqlwhgutkhxxhccsgvyoaccuicgybnqnslogtqhblegfudagpxfvjdacsxgevvepuwthdtybgflsxjdmmfumyqgpxatvdypjmlapccaxwkuxkilqqgpihyepkilhlfkdrbsefinitdcaghqmhylnixidrygdnzmgubeybczjceiybowglkywrpkfcwpsjbkcpnvfbxnpuqzhotzspgebptnhwevbkcueyzecdrjpbpxemagnwmtwikmkpqluwmvyswvxghajknjxfazshsvjkstkezdlbnkwxawlwkqnxghjzyigkvqpapvsntojnxlmtywdrommoltpbvxwqyijpkirvndwpgufgjelqvwffpuycqfwenhzrbzbdtupyutgccdjyvhptnuhxdwbmdcbpfvxvtfryszhaakwshrjseonfvjrrdefyxefqfvadlwmedpvnozobftnnsutegrtxhwitrwdpfienhdbvvykoynrsbpmzjtotjxbvemgoxreiveakmmbbvbmfbbnyfxwrueswdlxvuelbkrdxlutyukppkzjnmfmclqpkwzyylwlzsvriwomchzzqwqglpflaepoxcnnewzstvegyaowwhgvcwjhbbstvzhhvghigoazbjiikglbqlxlccrwqvyqxpbtpoqjliziwmdkzfsrqtqdkeniulsavsfqsjwnvpprvczcujihoqeanobhlsvbzmgflhykndfydbxatskf"))
+    print(s.longestPalindrome2("bb"))
         
 
 
